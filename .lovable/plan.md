@@ -2,13 +2,16 @@
 
 ## 1. Preserve the website (no redesign)
 - Serve the uploaded HTML as the home page, keeping its markup, class names, CSS and JavaScript intact. Inline JS/CSS moves into the page as-is; no React rewrite of behaviour.
-- Extract the large embedded images (card sheet, illustrations, portraits, headshot, icons) into hosted asset files unchanged, and point the original code at them, so the page loads fast. Pixel content is untouched.
+- Keep every script and data block in its original dependency order, and every stylesheet in its original order.
+- Behaviour initialises exactly once per page mount, with cleanup (timers, listeners, dialogs) on unmount so remounts don't double-bind. Tested with a hard refresh and with navigating away and back.
+- Extract only large embedded raster images (card sheet, portraits, headshot, photos) into hosted asset files unchanged. SVGs stay inline wherever animation or JavaScript references their internal elements or IDs; interactive illustrations are never flattened to images.
 - Fonts loaded via the same sources as the original.
 - Page title, description and social tags taken from the existing copy.
 
 ## 2. Notion connection (server-side only)
-- Link the native Notion connector (one workspace connection). You share the workshop database with it during sign-in. Token stays on the server; nothing in the browser.
-- Two fixed server endpoints only: "submit enquiry" and "submit exercise". Each writes to its hard-coded data source (enquiry `d0e8afa0…`, exercise `6115f234…`) using `parent.data_source_id` and Notion-Version `2025-09-03`. No proxy, browsing, reading or editing.
+- Link Lovable's native Notion connector (one workspace connection) using its documented pattern: the connection key and platform key are managed automatically and exposed only to server code. No manually created Notion token is requested unless the connector proves unable to do the writes (I'd tell you first). During Notion sign-in, share only the workshop response database.
+- Two fixed, ordinary HTTP POST JSON endpoints: `/api/public/enquiry` and `/api/public/exercise`, so `WORKSHOP_ENQUIRY_CONFIG.endpoint` and the exercise button can call them with plain `fetch`. Each writes only to its hard-coded data source (enquiry `d0e8afa0…`, exercise `6115f234…`) using `parent.data_source_id` and Notion-Version `2025-09-03`. No proxy, browsing, reading or editing.
+- Enable Lovable Cloud for a small private store used only for idempotency and rate limiting (see section 5).
 
 ## 3. Enquiry form
 - Set `WORKSHOP_ENQUIRY_CONFIG.endpoint` to the new endpoint; keep existing validation and prefilling.
@@ -24,21 +27,25 @@
 ## 5. Reliability and privacy
 - Server-side allowlist + length limits matching the page's limits; unknown fields rejected.
 - Long text split into 2,000-character rich-text chunks (no truncation).
-- Stable UUID per submission generated in the browser and reused on retry; button disabled while sending; server checks Notion for an existing page with that Submission ID before creating (duplicate protection without a separate copy of responses).
-- Spam protection: hidden honeypot field + minimum time-on-form check; light per-visitor rate limit (best effort, per server instance — noted as a limitation).
+- Stable UUID per submission generated in the browser and reused on retry; button disabled while sending.
+- Durable, atomic duplicate protection: a private table holding only submission ID, kind, status (processing / saved / failed), Notion page ID and timestamps — no form answers. The server claims the ID with a single atomic insert; a concurrent request with the same ID gets "in progress" or the existing receipt instead of creating a second page.
+- Uncertain outcomes (timeout or network error from Notion): before any retry creates a page, the server queries the data source for that Submission ID and records the found page; only if none exists does it create one.
+- Spam protection: shared rate limiter backed by the same store (per hashed IP + per kind, fixed window), plus the hidden honeypot. The time-on-form check is a very low threshold and only applied together with other signals, so autofill and assistive-tech submissions are not rejected.
 - Logs contain status codes only, never tokens or answers. Responses return just `{ ok, submissionId }`.
-- No extra database copy of responses.
+- No copy of responses stored outside Notion.
 
 ## 6. Verification
 - Side-by-side screenshots of original vs rebuilt at desktop and mobile.
 - Click through every decision choice, skill dialog, testimonial, card flip, timer, editing, reset, download.
-- Real test enquiry and test exercise (labelled "TEST") land in the correct Notion sources; a 2,000+ character answer saves complete; simulated failure keeps answers; double-click/retry yields one record; confirm no Notion token in browser files or requests.
-- Not published automatically.
+- Real test enquiry and test exercise (labelled "TEST") land in the correct Notion sources; a 2,000+ character answer saves complete; simulated failure keeps answers; double-click, retry and parallel concurrent requests with the same ID (from separate clients) yield one record; simulated timeout reconciles instead of duplicating; confirm no Notion token in browser files or requests.
+- Hard refresh and navigate-away-and-back checks for single initialisation.
+- Not published until you review desktop/mobile previews and the real Notion test records.
 
 ## What you will need to do
 - Approve the Notion connection card and share the workshop database with it.
 
 ## Technical details
-- TanStack Start: `src/routes/index.tsx` renders the original body markup (dangerouslySetInnerHTML of the trusted, static source) and loads the original script after hydration; CSS into a route stylesheet.
-- `createServerFn` handlers in `src/server/notion.functions.ts` with zod validation; gateway `https://connector-gateway.lovable.dev/notion/v1/pages` with `LOVABLE_API_KEY` + `NOTION_API_KEY`; duplicate check via `POST /data_sources/{id}/query` filtered on Submission ID.
-- Unit tests for field mapping, chunking and validation limits.
+- TanStack Start: `src/routes/index.tsx` renders the original body markup (static trusted source, inline SVGs intact) and, in a mount effect guarded by a module flag + cleanup, injects the original scripts sequentially in source order; stylesheets linked in original order.
+- Server routes `src/routes/api/public/enquiry.ts` and `exercise.ts` (POST + same-origin check), zod allowlist; Notion helpers in `*.server.ts`; gateway `https://connector-gateway.lovable.dev/notion/v1` with `LOVABLE_API_KEY` + connector-provided `NOTION_API_KEY`, verified via `get_connection_secrets` before coding.
+- Cloud tables (service-role only, RLS on, no public policies): `submission_receipts(submission_id pk, kind, status, notion_page_id, created_at, updated_at)` and `rate_limits(key, window_start, count)` with an atomic upsert-increment function.
+- Unit tests for field mapping, chunking, validation limits and idempotency state transitions.
