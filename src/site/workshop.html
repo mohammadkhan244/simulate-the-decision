@@ -1895,7 +1895,7 @@ section.testimonial-section .quote-slide cite .muted{
     <textarea id="enquiry-brief-preview" class="enquiry-brief-preview" readonly aria-label="Your workshop brief"></textarea>
     <div class="enquiry-review-actions">
       <button type="button" class="enquiry-secondary" id="enquiry-copy">Copy brief</button>
-      <a class="primary" id="enquiry-calendar" href="https://calendar.app.google/Wjw28GX6Ua5knPYg8" target="_blank" rel="noopener noreferrer">Choose a time <span class="sr-only">(opens booking calendar in a new tab)</span></a>
+      <a class="primary" id="enquiry-calendar" href="https://tidycal.com/mohammadukhan135/simulate-the-decision" target="_blank" rel="noopener noreferrer">Choose a time <span class="sr-only">(opens booking calendar in a new tab)</span></a>
     </div>
     <p id="enquiry-copy-status" class="enquiry-status" role="status" aria-live="polite"></p>
     <button type="button" class="enquiry-edit" id="enquiry-edit">Edit my brief</button>
@@ -2694,7 +2694,7 @@ window.paperMotion={get active(){return [...states.values()].filter(s=>!s.pendin
    TidyCal officially accepts name/email URL parameters, not custom answers. */
 window.WORKSHOP_ENQUIRY_CONFIG=Object.assign({
   endpoint:'/api/public/enquiry',
-  calendarUrl:'https://calendar.app.google/Wjw28GX6Ua5knPYg8'
+  calendarUrl:'https://tidycal.com/mohammadukhan135/simulate-the-decision'
 },window.WORKSHOP_ENQUIRY_CONFIG||{});
 (()=>{
   'use strict';
@@ -2729,6 +2729,8 @@ window.WORKSHOP_ENQUIRY_CONFIG=Object.assign({
   function calendarLink(data){
     const url=new URL(window.WORKSHOP_ENQUIRY_CONFIG.calendarUrl);
     if(url.protocol!=='https:')throw new Error('Invalid calendar URL');
+    url.searchParams.set('name',data.name);
+    url.searchParams.set('email',data.email);
     return url.href;
   }
   function setBusy(value){
