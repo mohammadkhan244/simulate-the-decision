@@ -60,7 +60,7 @@ async function findExisting(dataSourceId: string, submissionId: string) {
     { filter: { property: "Submission ID", rich_text: { equals: submissionId } }, page_size: 1 },
     10_000,
   );
-  const results = (r.results as { id: string }[] | undefined) ?? [];
+  const results = (r["results"] as { id: string }[] | undefined) ?? [];
   return results[0]?.id ?? null;
 }
 
@@ -134,7 +134,7 @@ export async function handleSubmission(request: Request, kind: Kind): Promise<Re
       { parent: { type: "data_source_id", data_source_id: dataSourceId }, properties },
       15_000,
     );
-    await finish("saved", String(page.id));
+    await finish("saved", String(page["id"]));
     return json(200, { ok: true, submissionId });
   } catch (e) {
     await finish("failed", null);
