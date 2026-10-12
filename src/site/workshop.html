@@ -2729,8 +2729,6 @@ window.WORKSHOP_ENQUIRY_CONFIG=Object.assign({
   function calendarLink(data){
     const url=new URL(window.WORKSHOP_ENQUIRY_CONFIG.calendarUrl);
     if(url.protocol!=='https:')throw new Error('Invalid calendar URL');
-    url.searchParams.set('name',data.name);
-    url.searchParams.set('email',data.email);
     return url.href;
   }
   function setBusy(value){
