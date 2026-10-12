@@ -1,5 +1,13 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1791843942203,
+      "tag": "0000_submission_idempotency_and_rate_limits",
+      "breakpoints": true
+    }
+  ]
 }

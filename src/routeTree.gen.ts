@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicEnquiryRouteImport } from './routes/api/public/enquiry'
+import { Route as ApiPublicExerciseRouteImport } from './routes/api/public/exercise'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicEnquiryRoute = ApiPublicEnquiryRouteImport.update({
+  id: '/api/public/enquiry',
+  path: '/api/public/enquiry',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicExerciseRoute = ApiPublicExerciseRouteImport.update({
+  id: '/api/public/exercise',
+  path: '/api/public/exercise',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/public/enquiry': typeof ApiPublicEnquiryRoute
+  '/api/public/exercise': typeof ApiPublicExerciseRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/public/enquiry': typeof ApiPublicEnquiryRoute
+  '/api/public/exercise': typeof ApiPublicExerciseRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/public/enquiry': typeof ApiPublicEnquiryRoute
+  '/api/public/exercise': typeof ApiPublicExerciseRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/api/public/enquiry' | '/api/public/exercise'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/api/public/enquiry' | '/api/public/exercise'
+  id: '__root__' | '/' | '/api/public/enquiry' | '/api/public/exercise'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiPublicEnquiryRoute: typeof ApiPublicEnquiryRoute
+  ApiPublicExerciseRoute: typeof ApiPublicExerciseRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/enquiry': {
+      id: '/api/public/enquiry'
+      path: '/api/public/enquiry'
+      fullPath: '/api/public/enquiry'
+      preLoaderRoute: typeof ApiPublicEnquiryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/exercise': {
+      id: '/api/public/exercise'
+      path: '/api/public/exercise'
+      fullPath: '/api/public/exercise'
+      preLoaderRoute: typeof ApiPublicExerciseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiPublicEnquiryRoute: ApiPublicEnquiryRoute,
+  ApiPublicExerciseRoute: ApiPublicExerciseRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
