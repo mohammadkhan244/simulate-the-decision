@@ -14,13 +14,84 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      rate_limits: {
+        Row: {
+          bucket: string
+          hits: number
+          window_start: string
+        }
+        Insert: {
+          bucket: string
+          hits?: number
+          window_start: string
+        }
+        Update: {
+          bucket?: string
+          hits?: number
+          window_start?: string
+        }
+        Relationships: []
+      }
+      submission_receipts: {
+        Row: {
+          attempts: number
+          created_at: string
+          kind: string
+          locked_until: string
+          notion_page_id: string | null
+          status: string
+          submission_id: string
+          updated_at: string
+        }
+        Insert: {
+          attempts?: number
+          created_at?: string
+          kind: string
+          locked_until?: string
+          notion_page_id?: string | null
+          status?: string
+          submission_id: string
+          updated_at?: string
+        }
+        Update: {
+          attempts?: number
+          created_at?: string
+          kind?: string
+          locked_until?: string
+          notion_page_id?: string | null
+          status?: string
+          submission_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      claim_submission: {
+        Args: { _id: string; _kind: string }
+        Returns: {
+          outcome: string
+          page_id: string
+        }[]
+      }
+      finish_submission: {
+        Args: { _id: string; _page_id: string; _status: string }
+        Returns: undefined
+      }
+      hit_rate_limit: {
+        Args: { _bucket: string; _max: number; _window_seconds: number }
+        Returns: boolean
+      }
+      read_submission: {
+        Args: { _id: string }
+        Returns: {
+          page_id: string
+          status: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
