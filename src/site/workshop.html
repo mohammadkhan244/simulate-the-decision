@@ -2823,6 +2823,8 @@ window.WORKSHOP_ENQUIRY_CONFIG=Object.assign({
       setPanel(true);$('enquiry-review-title').focus({preventScroll:true});
       return;
     }
+    let bookingTab=null;
+    try{bookingTab=window.open('about:blank','_blank')}catch{bookingTab=null}
     setBusy(true);request=new AbortController();
     const timeout=setTimeout(()=>request?.abort(),15000);
     try{
@@ -2837,8 +2839,14 @@ window.WORKSHOP_ENQUIRY_CONFIG=Object.assign({
         const receipt=await response.json();
         if(receipt.success===false||receipt.ok===false||receipt.error)throw new Error('Enquiry was not accepted');
       }
-      location.assign(calendar);
+      if(bookingTab){
+        try{bookingTab.opener=null}catch{}
+        bookingTab.location.href=calendar;
+      }else{
+        location.assign(calendar);
+      }
     }catch{
+      if(bookingTab){try{bookingTab.close()}catch{}}
       status.textContent='Your brief could not be sent. Your answers are still here—please try again.';
     }finally{
       clearTimeout(timeout);request=null;setBusy(false);
