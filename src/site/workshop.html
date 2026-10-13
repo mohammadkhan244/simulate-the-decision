@@ -1217,6 +1217,8 @@ section.camera-about{display:block;position:relative;isolation:isolate;text-alig
 #pricing.v49-pricing .v49-followup-offer h3{font:500 23px/1.3 var(--body);letter-spacing:-.025em;margin:0;max-width:310px}
 #pricing.v49-pricing .v49-followup-copy p{font:400 16px/1.6 var(--body);color:#cdccc7;margin:0}
 #pricing.v49-pricing .v49-followup-copy p+p{margin-top:12px;color:#bebeb9}
+#pricing.v49-pricing .v49-followup-copy p.v49-followup-action{margin-top:18px;max-width:none}
+#pricing.v49-pricing .v49-followup-copy .secondary{min-height:44px;padding:11px 20px;font-size:14px}
 @media(max-width:700px){
   #pricing.v49-pricing .v48-offer{grid-template-columns:1fr;gap:27px;padding:28px 25px 22px}
   #pricing.v49-pricing .v48-offer-main h3{font-size:29px;max-width:340px}
@@ -1443,7 +1445,7 @@ section.testimonial-section .quote-slide cite .muted{
 <main class="wrap" id="top"><div class="gravity-chapter" id="gravity-chapter"><div class="gravity-pin"><div class="gravity-content"><section class="hero">
 <div class="v31-hero-copy"><p class="label hero-audience">Workshops for engineers,<br>product managers and designers</p>
 <h1>Simulate the decision before your team<br><em>has to live with it.</em></h1>
-<p class="intro">A two-hour, in-person workshop for up to 10 people. Write a working day after a decision, compare what different roles expect, and design checks to run before you commit.</p>
+<p class="intro">A one-hour, in-person workshop for up to 10 people. Write a working day after a decision, compare what different roles expect, and design checks to run before you commit.</p>
 <div class="hero-primary-action"><a class="primary discuss-workshop" href="#workshop-enquiry">Discuss a workshop</a></div>
 </div>
 <div class="v31-hero-art"><div class="hero-object floating-deck" id="hero-cards" aria-label="The four prompts: Situation, Character, Emotion and Lens">
@@ -1610,7 +1612,7 @@ section.testimonial-section .quote-slide cite .muted{
 <div class="walk-action"><button class="secondary" id="walk-next" type="button">Try a 90-sec decision exercise</button></div>
 
 
-<div class="followup-topics skills-light-stage"><div><h3>Want to practice a specific skill?</h3><p id="skills-intro">The example above shows the full workshop process. If you want more practice with one part, choose a focused session—on its own or as a follow-up.</p></div><div class="skills-engineering-light" aria-hidden="true"><svg preserveAspectRatio="none" focusable="false"><defs>
+<div class="followup-topics skills-light-stage" id="skills-topics" tabindex="-1" style="scroll-margin-top:28px"><div><h3>Want to practice a specific skill?</h3><p id="skills-intro">The example above shows the full workshop process. If you want more practice with one part, choose a focused session—on its own or as a follow-up.</p></div><div class="skills-engineering-light" aria-hidden="true"><svg preserveAspectRatio="none" focusable="false"><defs>
 <linearGradient id="v45-skills-ambient" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e9e7e1" stop-opacity=".03"/><stop offset=".22" stop-color="#d4d3ce" stop-opacity=".07"/><stop offset=".76" stop-color="#d4d3ce" stop-opacity=".025"/><stop offset="1" stop-color="#d4d3ce" stop-opacity="0"/></linearGradient>
 <linearGradient id="v45-skills-beam" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ebe9e3" stop-opacity=".035"/><stop offset=".16" stop-color="#e7e6df" stop-opacity=".2"/><stop offset=".67" stop-color="#d0cfca" stop-opacity=".08"/><stop offset="1" stop-color="#d0cfca" stop-opacity="0"/></linearGradient>
 <radialGradient id="v45-skills-glow"><stop stop-color="#e6e5de" stop-opacity=".23"/><stop offset=".4" stop-color="#d3d2cd" stop-opacity=".075"/><stop offset="1" stop-color="#d3d2cd" stop-opacity="0"/></radialGradient>
@@ -1749,7 +1751,7 @@ section.testimonial-section .quote-slide cite .muted{
     <div class="v48-offer-main">
       <p class="v49-offer-label">Start here</p>
       <h3 id="workshop-offer-title">Long-term decision workshop</h3>
-      <p class="v48-offer-format"><strong>2 hours · Up to 10 participants</strong><span>In person</span></p>
+      <p class="v48-offer-format"><strong>1 hr · Up to 10 participants</strong><span>In person</span></p>
       <p class="v49-offer-decision" id="workshop-intro">Explore the work of moving to the new system while the old one still needs support.</p>
       <p class="v48-offer-price"><strong>$2,500 <span>USD</span></strong><span>Per team</span></p>
       <a class="primary discuss-workshop" id="pricing-booking" href="#workshop-enquiry">Discuss a workshop</a>
@@ -1774,6 +1776,7 @@ section.testimonial-section .quote-slide cite .muted{
     <div class="v49-followup-copy">
       <p>Need more practice with a skill raised in the workshop? Choose one focused follow-up session.</p>
       <p>Also available as a standalone session. Scope, format and price are agreed before booking. No series is required.</p>
+      <p class="v49-followup-action"><a class="secondary" href="#skills-topics">Try a specific skill above</a></p>
     </div>
   </aside>
 </section>
