@@ -8,7 +8,7 @@ const enquiry = {
 };
 const exercise = {
   decision_type: "Replace a system" as const, character_role: "The person maintaining it", writing_seconds: 90 as const,
-  scene: "s", observation: "o", assumption: "a", connection: "c", move: "m", generated_summary: "g",
+  scene: "s", observation: "o", seen_it: "si", data_shown: "No" as const, lives_instead: "in a spreadsheet", assumption: "a", connection: "c", move: "m", generated_summary: "g",
   situation_prompt: "sp", character_prompt: "cp", emotion_prompt: "ep", lens_prompt: "lp", reflection_prompt: "rp",
   submission_id: id,
 };
@@ -38,11 +38,15 @@ describe("submissions", () => {
     expect(exerciseSchema.safeParse({ ...exercise, writing_seconds: 120 }).success).toBe(false);
     expect(exerciseSchema.safeParse({ ...exercise, decision_type: "Other" }).success).toBe(false);
     expect(exerciseSchema.safeParse({ ...exercise, scene: "x".repeat(30001) }).success).toBe(false);
+    expect(exerciseSchema.safeParse({ ...exercise, data_shown: "Maybe" }).success).toBe(false);
   });
 
   it("maps the exercise source and selected timer", () => {
     const p = exerciseProperties(exerciseSchema.parse(exercise), new Date("2026-10-12T00:00:00Z"));
-    expect(p.Source.rich_text[0]!.text.content).toBe("workshop-website-exercise");
+    expect(p.Source.rich_text[0]!.text.content).toBe("workshop-website-exercise-v2");
+    expect(p["Would data have shown this?"]).toEqual({ select: { name: "No" } });
+    expect(p["Where it lives instead"].rich_text[0]!.text.content).toBe("in a spreadsheet");
+    expect(p["What would prove it wrong"].rich_text).toEqual([]);
     expect(p["Writing time (seconds)"]).toEqual({ number: 90 });
     expect(p.Response.title[0]!.text.content).toBe("Replace a system – The person maintaining it – 12 Oct 2026");
   });
