@@ -2,7 +2,7 @@
 import { z } from "zod";
 
 export const ENQUIRY_DATA_SOURCE_ID = "d0e8afa0-af45-478d-818d-460cfa4469f9";
-export const EXERCISE_DATA_SOURCE_ID = "6115f234-0d45-410c-aa4a-31dcabcd2da6";
+export const EXERCISE_DATA_SOURCE_ID = "1df7569e-4515-492a-b998-93298827d143";
 
 export const DECISION_TYPES = [
   "Replace a system",
@@ -92,17 +92,17 @@ export function exerciseProperties(d: ExerciseInput, now = new Date()) {
     "Decision type": { select: { name: d.decision_type } },
     "Character role": rt(d.character_role),
     "Writing time (seconds)": { number: d.writing_seconds },
-    Scenario: rt(d.scene),
-    "Line from the scenario": rt(d.observation),
+    Story: rt(d.scene),
+    "Line from the story": rt(d.observation),
     "Assumption to check": rt(d.assumption),
     "Connection to work": rt(d.connection),
     "Next check": rt(d.move),
     "Generated summary": rt(d.generated_summary),
-    "Situation prompt": rt(d.situation_prompt),
-    "Character prompt": rt(d.character_prompt),
-    "Emotion prompt": rt(d.emotion_prompt),
-    "Lens prompt": rt(d.lens_prompt),
-    "Reflection prompt": rt(d.reflection_prompt),
+    "Situation card": rt(d.situation_prompt),
+    "Character card": rt(d.character_prompt),
+    "Emotion card": rt(d.emotion_prompt),
+    "Lens card": rt(d.lens_prompt),
+    "Reflection card": rt(d.reflection_prompt),
     Source: rt("workshop-website-exercise"),
     "Submission ID": rt(d.submission_id),
     Status: { status: { name: "New" } },
