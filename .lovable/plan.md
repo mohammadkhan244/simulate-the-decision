@@ -1,23 +1,47 @@
-# Fix mobile layout + rename "Handle more demand"
+# Visitor walkthrough (description only, no website changes)
 
-## 1. Mobile "cut off" layout
-In your screenshot the page only fills the left half of the phone screen and the decision choices are clipped ("Autc…"). That usually means something on the page is wider than the screen, so the phone zooms out to fit it. I haven't confirmed which part causes it yet.
-- Open the page at real phone sizes (360, 390, 412 px wide) and find what is wider than the screen. The four decision choices and the spotlight/beam artwork behind them are the likeliest causes.
-- Fix only that part so the page fits the screen. On phones, the four choices will either wrap into a 2x2 grid or scroll sideways within their own row, whichever matches how the page already behaves. Desktop stays the same.
-- Check before and after on phone and desktop. Then click through all four choices, the skill dialogs and the exercise on a phone-sized screen.
+Paste-ready description for Claude:
 
-## 2. Rename "Handle more demand" to "Scaling a business"
-The change is small. The label appears in 4 places:
-- the choice button caption
-- the decision data label, which also shows in summaries and downloaded notes
-- the exercise's decision sentence ("Handle more demand without relying on the founder…"), reworded to "Scale the business without relying on the founder for every exception."
-- the allowed decision types the server accepts for Notion saves
+---
 
-Other text in that path already reads naturally, so it stays: "Try a scaling scenario" and the heading "Can the business handle more demand without relying on the same few people?". Tell me if you want the heading reworded too.
+The site is a one-page landing page for Mohammad Khan's "Simulate the decision before your team" workshop. A visitor scrolls top to bottom; most interaction happens in place, with no page changes.
 
-**Notion impact:** the Stories database's "Decision type" column has a "Handle more demand" option. New saves would add a new option, "Scaling a business", and older records keep the old one. If you'd like old and new records grouped together, rename the option in Notion first.
+**1. Hero and decision choice**
+- Headline: "Simulate the decision before your team." Visitor picks one of four decision types: Replace a system, Automate a process, Build or buy a tool, Handle more demand.
+- Picking one personalises the page below ("Here's how the workshop would explore that decision") and reveals sections that stay hidden until then, such as pricing and the skill follow-up.
 
-## Technical details
-- Edit `src/site/workshop.html` directly: CSS media-query fix for the overflowing element, plus the label in the button, the `decision-paths` JSON and the `scaling` exercise object.
-- Update `DECISION_TYPES` in `src/lib/submissions.ts` and its tests, then run the tests.
-- Playwright checks scrollWidth against innerWidth at phone widths.
+**2. How the workshop works / Leave with a check to run**
+- Explains the format and the takeaway: a concrete assumption-check to run back at work.
+
+**3. Try a 90-sec decision exercise ("Try a decision scenario")**
+Four stages: Reveal, Write, Connect, Check.
+- **Reveal:** "Reveal my scenario" deals flippable cards: Situation, Character, Emotion, Lens. "Change decision" switches decision type.
+- **Choose the Character's role:** The person using it / maintaining it / handling exceptions, or "Use the original role".
+- **Write:** "Write my scene" then "Start 90-sec timer". The visitor writes a short story under "Your scenario", with "Review the cards" available.
+- **Connect: "Find an assumption" / "Connect it to work"**, six questions:
+  1. Which line or action stands out? Quote it.
+  2. What did the character treat as true without checking?
+  3. Where have you seen it in real life?
+  4. Would your team's current reports, dashboards, or metrics have surfaced this? (Yes / No / Not sure. No or Not sure shows "If not, where does it live?")
+  5. Where could the same assumption affect your current work?
+  6. What could you ask or test? plus "What result would tell you it's wrong?"
+- **Check:** "See my decision check" shows a generated summary. Options: Edit my scenario, Edit my answers, Download my notes, Submit my decision check (anonymous, sent to the facilitator), Start a new scene.
+
+**4. Want to practice a specific skill?**
+- Six skill cards, each opening a dialog with details (for example "In robotics, a model has to hold up in the real world.") and a Close button.
+
+**5. What participants noticed**
+- Testimonials.
+
+**6. Workshop pricing** (shown after a decision is picked)
+- Long-term decision workshop (1 hr, up to 10 participants).
+- Targeted decision-skill session, with a "Try a specific skill above" button that scrolls back up to the skills.
+
+**7. Discuss a workshop (enquiry dialog)**
+- Opened from "Discuss a workshop" links. Fields: Name, Work email, Company, What is your team deciding?, Decision deadline, Participants (skill of interest is prefilled when relevant).
+- "Continue to calendar" checks the fields and saves the brief. Then the TidyCal booking page opens in a new tab with name and email filled in. If saving fails, the answers stay and the visitor can retry.
+- A "Your workshop brief" view offers Copy brief and Edit my brief.
+
+---
+
+No code or design changes are part of this.
