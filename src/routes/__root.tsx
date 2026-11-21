@@ -78,14 +78,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Mohammad Khan | Long-term decision workshops for engineering teams" },
+      {
+        name: "description",
+        content:
+          "Decision workshops for engineering teams making long-term commitments. Trace downstream effects, identify assumptions and know what to test before you commit.",
+      },
+      { name: "author", content: "Mohammad Khan" },
+      { property: "og:title", content: "Mohammad Khan | Long-term decision workshops for engineering teams" },
+      {
+        property: "og:description",
+        content:
+          "Decision workshops for engineering teams making long-term commitments. Trace downstream effects, identify assumptions and know what to test before you commit.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
