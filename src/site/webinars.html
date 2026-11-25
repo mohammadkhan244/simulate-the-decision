@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta name="description" content="Free online sessions for engineers, product managers, and designers. Practice one decision skill, write a short scene, and talk about what you noticed."/>
+<title>Free Webinars | Mohammad Khan</title>
+<meta property="og:title" content="Free Webinars | Mohammad Khan"/>
+<meta property="og:description" content="Free online sessions for engineers, product managers, and designers. Practice one decision skill, write a short scene, and talk about what you noticed."/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary"/>
+<style>
+:root{color-scheme:dark;--paper:#0c1012;--white:#171c1e;--ink:#eeeae1;--muted:#afaeaa;--line:#363839;--ruby:#d6d5d0;--title:WorkshopDisplay,Arial,sans-serif;--body:WorkshopBody,Arial,sans-serif;--label:WorkshopBody,Arial,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 var(--body)}
+button{font:inherit;cursor:pointer;color:inherit}
+button:focus-visible,a:focus-visible{outline:3px solid var(--ruby);outline-offset:5px}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{font-family:var(--title);font-weight:700;letter-spacing:-.035em}
+h1{font-size:clamp(38px,5vw,60px);line-height:1.05}
+h2{font-size:clamp(28px,3.5vw,40px);line-height:1.17}
+h3{font-size:24px;line-height:1.3}
+p{max-width:62ch}
+img,svg{display:block}
+img{max-width:100%;height:auto}
+a{color:inherit}
+button:disabled{cursor:not-allowed;opacity:.48}
+[hidden]{display:none!important}
+.wrap{max-width:1100px;margin:auto;padding:0 32px}
+.label{font:700 12px/1.5 var(--label);letter-spacing:1.35px;text-transform:uppercase;color:var(--muted)}
+.small{font-size:14px;color:var(--muted);line-height:1.5}
+.muted{color:var(--muted)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;top:-100px;left:20px;background:var(--ink);color:var(--paper);padding:12px;z-index:200}
+.skip:focus{top:12px}
+
+/* Nav */
+.nav{display:flex;justify-content:space-between;align-items:center;padding:26px 0;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;font:700 14px/1 var(--label);letter-spacing:1.2px;text-transform:uppercase;text-decoration:none;color:var(--ink)}
+.brand svg{width:30px;height:30px}
+.site-nav-links{display:flex;align-items:center;list-style:none;margin:0;padding:0;gap:0}
+.site-nav-links a{display:block;padding:7px 12px;font:700 12px/1 var(--label);letter-spacing:1.2px;text-transform:uppercase;text-decoration:none;color:var(--muted);border-radius:3px;white-space:nowrap;transition:color .15s}
+.site-nav-links a:hover,.site-nav-links a:focus-visible{color:var(--ink)}
+.site-nav-links a[aria-current=page]{color:var(--ink);text-decoration:underline;text-decoration-color:var(--ruby);text-underline-offset:4px;text-decoration-thickness:2px}
+.nav-menu-btn{display:none;background:none;border:0;padding:8px;min-height:44px;min-width:44px;color:var(--ink);cursor:pointer}
+
+/* Hero */
+.webinar-hero{padding:60px 0 56px}
+.webinar-hero .label{margin-bottom:20px}
+.webinar-hero h1{max-width:700px;margin-bottom:28px}
+.webinar-intro{font-size:18px;line-height:1.8;color:#babab5;max-width:580px}
+.webinar-intro p+p{margin-top:16px}
+
+/* Calendar */
+.calendar-section{border-top:1px solid var(--line);padding:56px 0 64px}
+.calendar-section h2{margin-bottom:8px;font-size:clamp(24px,3vw,34px)}
+.calendar-desc{margin-bottom:28px;color:var(--muted);font-size:16px;max-width:none}
+.calendar-plain-link{display:inline-block;margin-top:16px;font-size:14px;color:var(--muted);text-decoration:underline;text-underline-offset:4px}
+.calendar-plain-link:hover{color:var(--ink)}
+
+/* Testimonials */
+.webinar-testimonials{border-top:1px solid var(--line);padding:64px 0}
+.webinar-testimonials>h2{text-align:center;margin-bottom:36px}
+.testimonial-carousel{position:relative;width:100%;max-width:900px;margin:0 auto}
+.testimonial-track{display:grid;align-items:start;min-height:220px}
+.testimonial-slide{grid-area:1/1;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .6s}
+.testimonial-slide.active{opacity:1;visibility:visible;pointer-events:auto}
+.testimonial-slide blockquote{margin:0 0 24px;font:400 clamp(20px,2.2vw,27px)/1.55 var(--body);color:var(--ink);letter-spacing:-.01em;padding:0 32px;text-align:center}
+.testimonial-slide cite{font-style:normal;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.testimonial-slide cite strong{display:block;font-weight:700;font-size:16px}
+.testimonial-slide cite .role{color:var(--muted);font-size:14px}
+.testimonial-controls{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:28px}
+.testimonial-btn{background:none;border:1px solid var(--line);border-radius:50%;width:44px;height:44px;display:grid;place-items:center;color:var(--ink);transition:border-color .15s;padding:0}
+.testimonial-btn:hover{border-color:var(--ink)}
+.testimonial-dots{display:flex;gap:8px;align-items:center}
+.testimonial-dot{width:8px;height:8px;border-radius:50%;background:#5e605e;border:0;cursor:pointer;padding:0;transition:background .2s}
+.testimonial-dot[aria-current=true]{background:var(--ruby);width:10px;height:10px}
+.testimonial-pause{background:none;border:1px solid #565958;border-radius:50%;width:44px;height:44px;display:grid;place-items:center;color:#cccbc6;padding:0}
+.testimonial-pause:hover{border-color:var(--ink);color:var(--ink)}
+.webinar-quote-placeholder{text-align:center;padding:40px 32px;border:1px dashed var(--line);border-radius:4px;color:var(--muted);font-style:italic;font-size:16px;max-width:600px;margin:0 auto}
+
+/* Footer */
+.page-footer{border-top:1px solid var(--line);padding:30px 0 40px}
+.page-footer-inner{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.footer-nav{display:flex;gap:20px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+.footer-nav a{font-size:14px;color:var(--muted);text-decoration:underline;text-underline-offset:4px}
+.footer-nav a:hover{color:var(--ink)}
+
+/* Mobile */
+@media(max-width:620px){
+  .wrap{padding:0 22px}
+  .nav{padding:20px 0}
+  header.wrap{position:relative}
+  .nav-menu-btn{display:flex;align-items:center;justify-content:center}
+  .site-nav-links{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;align-items:flex-start;background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:4px 0 16px;z-index:200}
+  .site-nav-links a{padding:11px 0;width:100%;border-radius:0;border-bottom:1px solid var(--line)}
+  .site-nav-links li:last-child a{border-bottom:0}
+  .nav[data-open] .site-nav-links{display:flex}
+  .webinar-hero{padding:44px 0 40px}
+  .testimonial-slide blockquote{padding:0 8px}
+  .page-footer-inner{flex-direction:column;align-items:flex-start;gap:16px}
+}
+
+/* Reduced motion: show static wall instead of carousel */
+@media(prefers-reduced-motion:reduce){
+  .testimonial-track{display:flex;flex-direction:column;gap:24px;min-height:0}
+  .testimonial-slide{opacity:1;visibility:visible;pointer-events:auto;position:static;border:1px solid var(--line);border-radius:4px;padding:28px 32px}
+  .testimonial-slide blockquote{padding:0;text-align:left;font-size:18px}
+  .testimonial-slide cite{align-items:flex-start;text-align:left}
+  .testimonial-controls{display:none}
+}
+@font-face{font-family:WorkshopDisplay;src:url(/__l5e/assets-v1/77a2d401-c1f9-4149-90ee-96dc84aa983e/asset-02-8c500ac07c.woff) format("woff");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:WorkshopBody;src:url(/__l5e/assets-v1/17732b91-4913-4a72-98c2-6688af3df131/asset-03-9dc879e9ca.woff) format("woff");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:WorkshopBody;src:url(/__l5e/assets-v1/0e052cc6-5a06-4e2d-9b02-8ca6846eb8ee/asset-04-a7501bd675.woff) format("woff");font-weight:700;font-style:normal;font-display:swap}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="wrap">
+  <div class="nav">
+    <a aria-label="Mohammad Khan home" class="brand" href="/">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 64 76"><g fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="32" cy="38" r="23"/><path d="M8 68L44 8M20 68L56 8"/></g></svg>
+      MOHAMMAD KHAN
+    </a>
+    <nav aria-label="Site navigation">
+      <ul class="site-nav-links">
+        <li><a href="/" data-navlink="home">Home</a></li>
+        <li><a href="/" data-navlink="workshop">Workshop</a></li>
+        <li><a href="https://story-graph-three.vercel.app/" data-navlink="story-graph">Story Graph</a></li>
+        <li><a href="/webinars" data-navlink="webinars">Free Webinars</a></li>
+        <li><a href="#" data-navlink="loom">Loom</a></li>
+      </ul>
+      <button class="nav-menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
+        <svg aria-hidden="true" width="20" height="14" viewBox="0 0 20 14" fill="currentColor"><rect y="0" width="20" height="2" rx="1"/><rect y="6" width="20" height="2" rx="1"/><rect y="12" width="20" height="2" rx="1"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+
+  <section class="webinar-hero">
+    <p class="label">Free sessions · online</p>
+    <h1>Practice one decision skill.<br>Then talk about what you found.</h1>
+    <div class="webinar-intro">
+      <p>Every few weeks, I run a free live session online. It is open to engineers, product managers, and designers.</p>
+      <p>In each session, you write a short scene. You imagine a working day after a decision your team might make. Then the group shares what they noticed.</p>
+      <p>No fee. No sign-up. Just show up and try it.</p>
+    </div>
+  </section>
+
+  <section class="calendar-section" aria-labelledby="calendar-heading">
+    <h2 id="calendar-heading">Upcoming sessions</h2>
+    <p class="calendar-desc">Pick a session and RSVP to save your spot.</p>
+    <iframe src="https://luma.com/embed/calendar/cal-LKCwpS2u2HibRGq/events" width="100%" height="450" frameborder="0" style="border:1px solid #bfcbda88;border-radius:4px;" allowfullscreen aria-hidden="false" tabindex="0" title="Free webinar calendar"></iframe>
+    <a class="calendar-plain-link" href="https://luma.com/Ficitoneering" target="_blank" rel="noopener noreferrer">See all events on Luma &rarr;</a>
+  </section>
+
+  <section class="webinar-testimonials" aria-labelledby="webinar-testimonials-heading">
+    <h2 id="webinar-testimonials-heading">What people said</h2>
+
+    <!-- PLACEHOLDER: Replace this block with webinar attendee testimonials when you have them.
+         Format each quote as:
+         <figure class="testimonial-slide active" aria-roledescription="slide" aria-label="[Name]" style="margin:0">
+           <blockquote><p>[Full quote text. No "read more" — show it all.]</p></blockquote>
+           <cite><strong>[Name]</strong><span class="role">[Role or company]</span></cite>
+         </figure>
+         Add more <figure> elements for each testimonial.
+         Remove the placeholder paragraph below once you add real quotes. -->
+
+    <div class="testimonial-carousel" id="webinar-carousel" aria-roledescription="carousel" aria-label="Webinar feedback">
+      <div class="testimonial-track" id="webinar-quotes">
+        <p class="webinar-quote-placeholder">Webinar testimonials go here — add quotes from attendees when you have them.</p>
+      </div>
+      <div class="testimonial-controls" id="webinar-controls" hidden></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="page-footer">
+    <div class="page-footer-inner">
+      <p class="small">Fictioneering &middot; Mohammad Khan</p>
+      <ul class="footer-nav" aria-label="More pages">
+        <li><a href="/">The workshop</a></li>
+        <li><a href="https://story-graph-three.vercel.app/">Story Graph</a></li>
+        <li><a href="/webinars" aria-current="page">Free Webinars</a></li>
+        <li><a href="#">Loom</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* Nav: current-page highlight and mobile hamburger */
+  var p=location.pathname;
+  document.querySelectorAll('[data-navlink]').forEach(function(a){
+    var k=a.dataset.navlink;
+    if(p==='/'&&(k==='home'||k==='workshop'))a.setAttribute('aria-current','page');
+    else if(p==='/webinars'&&k==='webinars')a.setAttribute('aria-current','page');
+  });
+  var btn=document.querySelector('.nav-menu-btn');
+  if(btn){
+    var navEl=btn.closest('.nav');
+    btn.addEventListener('click',function(){
+      var open=navEl.hasAttribute('data-open');
+      navEl.toggleAttribute('data-open');
+      btn.setAttribute('aria-expanded',String(!open));
+      btn.setAttribute('aria-label',open?'Open menu':'Close menu');
+    });
+    document.addEventListener('click',function(e){
+      if(navEl.hasAttribute('data-open')&&!navEl.contains(e.target)){
+        navEl.removeAttribute('data-open');
+        btn.setAttribute('aria-expanded','false');
+        btn.setAttribute('aria-label','Open menu');
+      }
+    });
+  }
+
+  /* Testimonials carousel — only runs if there are real slides */
+  var slides=[...document.querySelectorAll('.testimonial-slide')];
+  if(!slides.length)return;
+  var reduced=matchMedia('(prefers-reduced-motion:reduce)');
+  if(reduced.matches)return; /* wall layout handled by CSS */
+
+  var current=0,userPaused=false,hovered=false,focused=false,carouselVisible=false;
+  var carousel=document.getElementById('webinar-carousel');
+  var controls=document.getElementById('webinar-controls');
+  controls.hidden=false;
+
+  var names=slides.map(function(s){return s.getAttribute('aria-label')||'';});
+  names.forEach(function(name,i){
+    var dot=document.createElement('button');
+    dot.type='button';
+    dot.className='testimonial-dot';
+    dot.setAttribute('aria-label','Show testimonial '+(i+1)+(name?' from '+name:''));
+    dot.setAttribute('aria-current',String(i===0));
+    dot.onclick=function(){userPaused=true;show(i);};
+    controls.appendChild(dot);
+  });
+
+  var prevBtn=document.createElement('button');
+  prevBtn.type='button';prevBtn.className='testimonial-btn';prevBtn.setAttribute('aria-label','Previous');
+  prevBtn.innerHTML='<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  prevBtn.onclick=function(){userPaused=true;show(current-1);};
+
+  var nextBtn=document.createElement('button');
+  nextBtn.type='button';nextBtn.className='testimonial-btn';nextBtn.setAttribute('aria-label','Next');
+  nextBtn.innerHTML='<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  nextBtn.onclick=function(){userPaused=true;show(current+1);};
+
+  var pauseBtn=document.createElement('button');
+  pauseBtn.type='button';pauseBtn.className='testimonial-pause';
+  function updatePause(){
+    pauseBtn.setAttribute('aria-label',userPaused?'Resume auto-advance':'Pause auto-advance');
+    pauseBtn.innerHTML=userPaused
+      ?'<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 2.5 13 8 4 13.5Z" fill="currentColor"/></svg>'
+      :'<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3.5 2h3v12h-3zm6 0h3v12h-3z" fill="currentColor"/></svg>';
+  }
+  pauseBtn.onclick=function(){userPaused=!userPaused;updatePause();};
+
+  controls.appendChild(prevBtn);
+  controls.appendChild(pauseBtn);
+  controls.appendChild(nextBtn);
+
+  function show(i){
+    current=(i+slides.length)%slides.length;
+    slides.forEach(function(s,n){
+      s.classList.toggle('active',n===current);
+      s.setAttribute('aria-hidden',String(n!==current));
+    });
+    [...controls.querySelectorAll('.testimonial-dot')].forEach(function(d,n){
+      d.setAttribute('aria-current',String(n===current));
+    });
+  }
+
+  carousel.onmouseenter=function(){hovered=true;};
+  carousel.onmouseleave=function(){hovered=false;};
+  carousel.onfocusin=function(){focused=true;};
+  carousel.onfocusout=function(e){if(!carousel.contains(e.relatedTarget))focused=false;};
+  carousel.addEventListener('keydown',function(e){
+    if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
+    e.preventDefault();userPaused=true;show(current+(e.key==='ArrowRight'?1:-1));updatePause();
+  });
+  var tx=0,ty=0;
+  carousel.addEventListener('touchstart',function(e){tx=e.changedTouches[0].clientX;ty=e.changedTouches[0].clientY;},{passive:true});
+  carousel.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.4){userPaused=true;show(current+(dx<0?1:-1));updatePause();}
+  },{passive:true});
+
+  new IntersectionObserver(function(entries){carouselVisible=entries[0].isIntersecting;},{threshold:.15}).observe(carousel);
+  setInterval(function(){
+    if(!userPaused&&!hovered&&!focused&&carouselVisible&&!document.hidden)show(current+1);
+  },10000);
+
+  reduced.addEventListener('change',function(e){if(e.matches){userPaused=true;updatePause();}});
+  show(0);updatePause();
+})();
+</script>
+</body>
+</html>

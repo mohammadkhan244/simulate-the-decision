@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WebinarsRouteImport } from './routes/webinars'
 import { Route as ApiPublicEnquiryRouteImport } from './routes/api/public/enquiry'
 import { Route as ApiPublicExerciseRouteImport } from './routes/api/public/exercise'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WebinarsRoute = WebinarsRouteImport.update({
+  id: '/webinars',
+  path: '/webinars',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicEnquiryRoute = ApiPublicEnquiryRouteImport.update({
@@ -31,30 +37,34 @@ const ApiPublicExerciseRoute = ApiPublicExerciseRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/webinars': typeof WebinarsRoute
   '/api/public/enquiry': typeof ApiPublicEnquiryRoute
   '/api/public/exercise': typeof ApiPublicExerciseRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/webinars': typeof WebinarsRoute
   '/api/public/enquiry': typeof ApiPublicEnquiryRoute
   '/api/public/exercise': typeof ApiPublicExerciseRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/webinars': typeof WebinarsRoute
   '/api/public/enquiry': typeof ApiPublicEnquiryRoute
   '/api/public/exercise': typeof ApiPublicExerciseRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/public/enquiry' | '/api/public/exercise'
+  fullPaths: '/' | '/webinars' | '/api/public/enquiry' | '/api/public/exercise'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/public/enquiry' | '/api/public/exercise'
-  id: '__root__' | '/' | '/api/public/enquiry' | '/api/public/exercise'
+  to: '/' | '/webinars' | '/api/public/enquiry' | '/api/public/exercise'
+  id: '__root__' | '/' | '/webinars' | '/api/public/enquiry' | '/api/public/exercise'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  WebinarsRoute: typeof WebinarsRoute
   ApiPublicEnquiryRoute: typeof ApiPublicEnquiryRoute
   ApiPublicExerciseRoute: typeof ApiPublicExerciseRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/webinars': {
+      id: '/webinars'
+      path: '/webinars'
+      fullPath: '/webinars'
+      preLoaderRoute: typeof WebinarsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/enquiry': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  WebinarsRoute: WebinarsRoute,
   ApiPublicEnquiryRoute: ApiPublicEnquiryRoute,
   ApiPublicExerciseRoute: ApiPublicExerciseRoute,
 }
