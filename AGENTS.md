@@ -14,3 +14,4 @@
 - Embedded images/fonts were extracted unchanged to Lovable Assets (`src/assets/site/*.asset.json`); interactive SVGs stay inline.
 - Form submissions go to plain JSON POST routes `/api/public/enquiry` and `/api/public/exercise`, which write to fixed Notion data sources via the Notion connector gateway (server-only).
 - Duplicate protection uses `submission_receipts` (IDs/status/page IDs only, never answers) with an atomic claim + Notion reconcile on retry; rate limiting uses the shared `rate_limits` table.
+- Webinar testimonials use a continuously translated track with duplicate slides excluded from the reading order; pause for reading and show a static list for reduced motion to keep the loop accessible.
