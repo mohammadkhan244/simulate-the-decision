@@ -59,7 +59,12 @@ export interface FileRouteTypes {
   fullPaths: '/' | '/webinars' | '/api/public/enquiry' | '/api/public/exercise'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/webinars' | '/api/public/enquiry' | '/api/public/exercise'
-  id: '__root__' | '/' | '/webinars' | '/api/public/enquiry' | '/api/public/exercise'
+  id:
+    | '__root__'
+    | '/'
+    | '/webinars'
+    | '/api/public/enquiry'
+    | '/api/public/exercise'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
