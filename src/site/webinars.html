@@ -47,6 +47,18 @@ button:disabled{cursor:not-allowed;opacity:.48}
 .site-nav-links a[aria-current=page]{color:var(--ink);text-decoration:underline;text-decoration-color:var(--ruby);text-underline-offset:4px;text-decoration-thickness:2px}
 .nav-menu-btn{display:none;background:none;border:0;padding:8px;min-height:44px;min-width:44px;color:var(--ink);cursor:pointer}
 
+/* Free Webinars nav pill: filled accent, rounded-full, pulsing ring + dot */
+:root{--nav-pill:#a72f39;--nav-pill-hover:#8d2733;--nav-pill-ring:#a72f3999;--nav-pill-ring-out:#a72f3900}
+.site-nav-links a.nav-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 15px;border-radius:999px;background:var(--nav-pill);color:#fff;text-decoration:none;animation:navPillRing 2s ease-in-out infinite}
+.site-nav-links a.nav-pill:hover,.site-nav-links a.nav-pill:focus-visible{background:var(--nav-pill-hover);color:#fff;animation-play-state:paused}
+.site-nav-links a.nav-pill[aria-current=page]{text-decoration:none}
+.site-nav-links a.nav-pill .nav-pill-dot{width:7px;height:7px;border-radius:50%;background:#fff;flex:0 0 auto;animation:navPillDot 2s ease-in-out infinite}
+.site-nav-links a.nav-pill:hover .nav-pill-dot,.site-nav-links a.nav-pill:focus-visible .nav-pill-dot{animation-play-state:paused}
+@keyframes navPillRing{0%{box-shadow:0 0 0 0 var(--nav-pill-ring)}70%{box-shadow:0 0 0 9px var(--nav-pill-ring-out)}100%{box-shadow:0 0 0 0 var(--nav-pill-ring-out)}}
+@keyframes navPillDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.5}}
+@media(prefers-reduced-motion:reduce){.site-nav-links a.nav-pill,.site-nav-links a.nav-pill .nav-pill-dot{animation:none}.site-nav-links a.nav-pill{box-shadow:0 0 0 3px var(--nav-pill-ring)}}
+@media(max-width:620px){.site-nav-links a.nav-pill{width:auto;border-bottom:0;border-radius:999px;padding:11px 16px;margin:12px 0 2px}}
+
 /* Hero */
 .webinar-hero{padding:60px 0 56px}
 .webinar-hero .label{margin-bottom:20px}
@@ -58,8 +70,13 @@ button:disabled{cursor:not-allowed;opacity:.48}
 .calendar-section{border-top:1px solid var(--line);padding:56px 0 64px}
 .calendar-section h2{margin-bottom:8px;font-size:clamp(24px,3vw,34px)}
 .calendar-desc{margin-bottom:28px;color:var(--muted);font-size:16px;max-width:none}
-.calendar-plain-link{display:inline-block;margin-top:16px;font-size:14px;color:var(--muted);text-decoration:underline;text-underline-offset:4px}
-.calendar-plain-link:hover{color:var(--ink)}
+/* Primary button, matching the workshop site's primary action */
+:root{--primary-fill:#dddcd6;--primary-fill-hover:#f2f0ea;--primary-ink:#0d1112}
+.primary{display:inline-flex;min-height:48px;align-items:center;justify-content:center;gap:10px;padding:14px 24px;border:1px solid var(--primary-fill);border-radius:3px;background:var(--primary-fill);color:var(--primary-ink);font-weight:700;font-size:15px;text-decoration:none;transition:background .18s,border-color .18s}
+.primary:hover{background:var(--primary-fill-hover);border-color:var(--primary-fill-hover)}
+.primary .btn-arrow{flex:0 0 auto;transition:transform .18s}
+.primary:hover .btn-arrow{transform:translateX(4px)}
+.calendar-events-btn{margin-top:20px}
 
 /* Testimonials */
 .webinar-testimonials{border-top:1px solid var(--line);padding:64px 0}
@@ -118,8 +135,8 @@ button:disabled{cursor:not-allowed;opacity:.48}
       <ul class="site-nav-links">
         <li><a href="/" data-navlink="home">Home</a></li>
         <li><a href="/" data-navlink="workshop">Workshop</a></li>
-        <li><a href="https://story-graph-three.vercel.app/" data-navlink="story-graph">Story Graph</a></li>
-        <li><a href="/webinars" data-navlink="webinars">Free Webinars</a></li>
+        <li><a href="https://story-graph-three.vercel.app/" data-navlink="story-graph">Story Analyzer</a></li>
+        <li><a class="nav-pill" href="/webinars" data-navlink="webinars"><span class="nav-pill-dot" aria-hidden="true"></span>Free Webinars</a></li>
         
       </ul>
       <button class="nav-menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
@@ -145,7 +162,7 @@ button:disabled{cursor:not-allowed;opacity:.48}
     <h2 id="calendar-heading">Upcoming sessions</h2>
     <p class="calendar-desc">Pick a session and RSVP to save your spot.</p>
     <iframe src="https://luma.com/embed/calendar/cal-LKCwpS2u2HibRGq/events" width="100%" height="450" frameborder="0" style="border:1px solid #bfcbda88;border-radius:4px;" allowfullscreen aria-hidden="false" tabindex="0" title="Free webinar calendar"></iframe>
-    <a class="calendar-plain-link" href="https://luma.com/Ficitoneering" target="_blank" rel="noopener noreferrer">See all events on Luma &rarr;</a>
+    <a class="primary calendar-events-btn" href="https://luma.com/Ficitoneering" target="_blank" rel="noopener noreferrer">See all events on Luma<svg aria-hidden="true" class="btn-arrow" focusable="false" height="16" viewBox="0 0 16 16" width="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg></a>
   </section>
 
   <section class="webinar-testimonials" aria-labelledby="webinar-testimonials-heading">
@@ -165,7 +182,7 @@ button:disabled{cursor:not-allowed;opacity:.48}
       <p class="small">Fictioneering &middot; Mohammad Khan</p>
       <ul class="footer-nav" aria-label="More pages">
         <li><a href="/">The workshop</a></li>
-        <li><a href="https://story-graph-three.vercel.app/">Story Graph</a></li>
+        <li><a href="https://story-graph-three.vercel.app/">Story Analyzer</a></li>
         <li><a href="/webinars" aria-current="page">Free Webinars</a></li>
         
       </ul>
