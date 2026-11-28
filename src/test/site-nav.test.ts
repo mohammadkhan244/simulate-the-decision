@@ -10,6 +10,18 @@ const pages = [
 
 describe("Site navigation labels and call to action", () => {
   for (const [name, html] of pages) {
+    it(`combines Home and Workshop into one Workshop link on ${name}`, () => {
+      expect(html).not.toContain('data-navlink="home"');
+      expect(html).toContain('href="/" data-navlink="workshop">Workshop</a>');
+      const navMatch = html.match(/<ul class="site-nav-links">[\s\S]*?<\/ul>/);
+      expect(navMatch?.[0].match(/<li>/g)).toHaveLength(3);
+    });
+
+    it(`styles every banner nav item as a bordered pill button on ${name}`, () => {
+      expect(html).toContain("border:1px solid var(--nav-btn-border);border-radius:999px");
+      expect(html).toContain("background:var(--nav-btn-bg)");
+    });
+
     it(`renames Story Graph to Story Analyzer on ${name}`, () => {
       expect(html).toContain("Story Analyzer");
       expect(html).not.toContain("Story Graph");

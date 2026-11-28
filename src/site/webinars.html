@@ -41,23 +41,23 @@ button:disabled{cursor:not-allowed;opacity:.48}
 .nav{display:flex;justify-content:space-between;align-items:center;padding:26px 0;border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:12px;font:700 14px/1 var(--label);letter-spacing:1.2px;text-transform:uppercase;text-decoration:none;color:var(--ink)}
 .brand svg{width:30px;height:30px}
-.site-nav-links{display:flex;align-items:center;list-style:none;margin:0;padding:0;gap:0}
-.site-nav-links a{display:block;padding:7px 12px;font:700 12px/1 var(--label);letter-spacing:1.2px;text-transform:uppercase;text-decoration:none;color:var(--muted);border-radius:3px;white-space:nowrap;transition:color .15s}
-.site-nav-links a:hover,.site-nav-links a:focus-visible{color:var(--ink)}
-.site-nav-links a[aria-current=page]{color:var(--ink);text-decoration:underline;text-decoration-color:var(--ruby);text-underline-offset:4px;text-decoration-thickness:2px}
+:root{--nav-btn-bg:#171c1e;--nav-btn-hover:#242b2e;--nav-btn-border:#565a5b;--nav-btn-border-hover:#9a9a95;--nav-btn-active-bg:#22282b;--nav-btn-active-border:#eeeae1;--nav-pill:#a72f39;--nav-pill-hover:#8d2733;--nav-pill-ring:#a72f3999;--nav-pill-ring-out:#a72f3900}
+.site-nav-links{display:flex;align-items:center;list-style:none;margin:0;padding:0;gap:10px}
+.site-nav-links a{display:inline-flex;align-items:center;justify-content:center;padding:9px 16px;font:700 12px/1 var(--label);letter-spacing:1.2px;text-transform:uppercase;text-decoration:none;color:var(--ink);background:var(--nav-btn-bg);border:1px solid var(--nav-btn-border);border-radius:999px;white-space:nowrap;transition:background .15s,border-color .15s,color .15s,transform .15s}
+.site-nav-links a:hover,.site-nav-links a:focus-visible{background:var(--nav-btn-hover);border-color:var(--nav-btn-border-hover);color:#fffdf6;transform:translateY(-1px)}
+.site-nav-links a[aria-current=page]{background:var(--nav-btn-active-bg);border-color:var(--nav-btn-active-border);color:#fffdf6;text-decoration:none}
 .nav-menu-btn{display:none;background:none;border:0;padding:8px;min-height:44px;min-width:44px;color:var(--ink);cursor:pointer}
 
 /* Free Webinars nav pill: filled accent, rounded-full, pulsing ring + dot */
-:root{--nav-pill:#a72f39;--nav-pill-hover:#8d2733;--nav-pill-ring:#a72f3999;--nav-pill-ring-out:#a72f3900}
-.site-nav-links a.nav-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 15px;border-radius:999px;background:var(--nav-pill);color:#fff;text-decoration:none;animation:navPillRing 2s ease-in-out infinite}
-.site-nav-links a.nav-pill:hover,.site-nav-links a.nav-pill:focus-visible{background:var(--nav-pill-hover);color:#fff;animation-play-state:paused}
-.site-nav-links a.nav-pill[aria-current=page]{text-decoration:none}
+.site-nav-links a.nav-pill{gap:8px;background:var(--nav-pill);border-color:var(--nav-pill);color:#fff;animation:navPillRing 2s ease-in-out infinite}
+.site-nav-links a.nav-pill:hover,.site-nav-links a.nav-pill:focus-visible{background:var(--nav-pill-hover);border-color:var(--nav-pill-hover);color:#fff;animation-play-state:paused}
+.site-nav-links a.nav-pill[aria-current=page]{background:var(--nav-pill);border-color:#fffdf699;color:#fff;text-decoration:none}
 .site-nav-links a.nav-pill .nav-pill-dot{width:7px;height:7px;border-radius:50%;background:#fff;flex:0 0 auto;animation:navPillDot 2s ease-in-out infinite}
 .site-nav-links a.nav-pill:hover .nav-pill-dot,.site-nav-links a.nav-pill:focus-visible .nav-pill-dot{animation-play-state:paused}
 @keyframes navPillRing{0%{box-shadow:0 0 0 0 var(--nav-pill-ring)}70%{box-shadow:0 0 0 9px var(--nav-pill-ring-out)}100%{box-shadow:0 0 0 0 var(--nav-pill-ring-out)}}
 @keyframes navPillDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.5}}
-@media(prefers-reduced-motion:reduce){.site-nav-links a.nav-pill,.site-nav-links a.nav-pill .nav-pill-dot{animation:none}.site-nav-links a.nav-pill{box-shadow:0 0 0 3px var(--nav-pill-ring)}}
-@media(max-width:620px){.site-nav-links a.nav-pill{width:auto;border-bottom:0;border-radius:999px;padding:11px 16px;margin:12px 0 2px}}
+@media(prefers-reduced-motion:reduce){.site-nav-links a.nav-pill,.site-nav-links a.nav-pill .nav-pill-dot{animation:none}.site-nav-links a.nav-pill{box-shadow:0 0 0 3px var(--nav-pill-ring)}.site-nav-links a:hover,.site-nav-links a:focus-visible{transform:none}}
+@media(max-width:760px){.site-nav-links{gap:6px}.site-nav-links a{padding:8px 12px;font-size:11px;letter-spacing:1px}}
 
 /* Hero */
 .webinar-hero{padding:60px 0 56px}
@@ -107,9 +107,9 @@ button:disabled{cursor:not-allowed;opacity:.48}
   .nav{padding:20px 0}
   header.wrap{position:relative}
   .nav-menu-btn{display:flex;align-items:center;justify-content:center}
-  .site-nav-links{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;align-items:flex-start;background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:4px 0 16px;z-index:200}
-  .site-nav-links a{padding:11px 0;width:100%;border-radius:0;border-bottom:1px solid var(--line)}
-  .site-nav-links li:last-child a{border-bottom:0}
+  .site-nav-links{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;align-items:stretch;gap:10px;background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 22px 18px;z-index:200}
+  .site-nav-links li{width:100%}
+  .site-nav-links a{width:100%;padding:12px 16px;font-size:12px;letter-spacing:1.2px}
   .nav[data-open] .site-nav-links{display:flex}
   .webinar-hero{padding:44px 0 40px}
   .testimonial-slide{padding:22px}
@@ -133,11 +133,9 @@ button:disabled{cursor:not-allowed;opacity:.48}
     </a>
     <nav aria-label="Site navigation">
       <ul class="site-nav-links">
-        <li><a href="/" data-navlink="home">Home</a></li>
         <li><a href="/" data-navlink="workshop">Workshop</a></li>
         <li><a href="https://story-graph-three.vercel.app/" data-navlink="story-graph">Story Analyzer</a></li>
         <li><a class="nav-pill" href="/webinars" data-navlink="webinars"><span class="nav-pill-dot" aria-hidden="true"></span>Free Webinars</a></li>
-        
       </ul>
       <button class="nav-menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
         <svg aria-hidden="true" width="20" height="14" viewBox="0 0 20 14" fill="currentColor"><rect y="0" width="20" height="2" rx="1"/><rect y="6" width="20" height="2" rx="1"/><rect y="12" width="20" height="2" rx="1"/></svg>
@@ -196,7 +194,7 @@ button:disabled{cursor:not-allowed;opacity:.48}
   var p=location.pathname;
   document.querySelectorAll('[data-navlink]').forEach(function(a){
     var k=a.dataset.navlink;
-    if(p==='/'&&(k==='home'||k==='workshop'))a.setAttribute('aria-current','page');
+    if(p==='/'&&k==='workshop')a.setAttribute('aria-current','page');
     else if(p==='/webinars'&&k==='webinars')a.setAttribute('aria-current','page');
   });
   var btn=document.querySelector('.nav-menu-btn');
